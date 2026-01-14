@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  redcomponent-db-offloading - Module placeholder
+  buildsystem.xml Configuration File
+
+  Schema: https://bep-venture.de/schemas/buildsystem v3.4.15
+  Status: Placeholder for redcomponent-db wrapper module
+-->
+<buildSystem version="3.4.15" xmlns="https://bep-venture.de/schemas/buildsystem">
+
+  <project>
+    <name>redcomponent-db-offloading</name>
+    <version>0.1.0</version>
+    <description>Wrapper module for redcomponent-db.</description>
+    <type>module</type>
+    <license>EULA</license>
+    <maintainer>BEP Venture UG</maintainer>
+  </project>
+
+  <dependencies>
+    <dependency name="BuildSystem" version="3.4.15" source="layer1" updatePolicy="stable" policy="require-failure" branch="development" />
+  </dependencies>
+
+  <requiredModules>
+    <module name="BuildSystem" version="3.4.15" updatePolicy="stable">
+      <repo>BenniProbst/BuildSystem</repo>
+      <branch>development</branch>
+      <source>git</source>
+    </module>
+  </requiredModules>
+
+  <dimensions>
+    <dimension id="D3" name="Build Modes" enabled="true" phase="2+">
+      <include file="${BEP_BUILDSYSTEM_ROOT}/cookbooks/base.xml" />
+    </dimension>
+    <dimension id="D5" name="Build Configurations" enabled="true" />
+  </dimensions>
+
+
+  <build>
+    <system>cmake</system>
+  </build>
+
+  <phases>
+    <phase id="0" name="Bootstrap" interpreter="bash" enabled="true" />
+    <phase id="1" name="GroundTruth" interpreter="bash" enabled="true" compilers="GCC,Clang" />
+    <phase id="2" name="ProjectBuild" interpreter="cmake" enabled="true" />
+    <phase id="3" name="TargetDelivery" interpreter="cpp" enabled="true" compilers="GCC,Clang,MSVC" />
+    <phase id="4" name="HardwareAcceleration" interpreter="cpp" enabled="false" />
+    <phase id="5" name="AIOptimization" interpreter="cpp" enabled="false" />
+  </phases>
+
+  <exports>
+    <environment>
+      <var name="REDCOMPONENT_DB_OFFLOADING_ROOT" path="." />
+    </environment>
+  </exports>
+
+</buildSystem>

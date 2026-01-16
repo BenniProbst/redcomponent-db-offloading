@@ -15,6 +15,7 @@
     <type>module</type>
     <license>EULA</license>
     <maintainer>BEP Venture UG</maintainer>
+    <repository>https://github.com/BenniProbst/redcomponent-db-offloading.git</repository>
   </project>
 
   <dependencies>

@@ -24,36 +24,5 @@ install(DIRECTORY include/ DESTINATION include)
 option(BUILD_TESTING "Build tests" ON)
 
 if(BUILD_TESTING)
-    enable_testing()
-
-    # Fetch GoogleTest
-    include(FetchContent)
-    FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG v1.14.0
-    )
-    # For Windows: Prevent overriding the parent project's compiler/linker settings
-    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-    FetchContent_MakeAvailable(googletest)
-
-    # Test executable
-    add_executable(test_offloading
-        tests/test_offloading.cpp
-    )
-
-    target_link_libraries(test_offloading PRIVATE
-        ${PROJECT_NAME}
-        GTest::gtest_main
-    )
-
-    target_include_directories(test_offloading PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-    )
-
-    include(GoogleTest)
-    gtest_discover_tests(test_offloading)
-
-    # Add test to CTest
-    add_test(NAME test_offloading COMMAND test_offloading)
+    add_subdirectory(tests)
 endif()
